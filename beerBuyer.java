@@ -12,8 +12,10 @@ import java.text.DecimalFormat;
 import javax.imageio.ImageIO;
 
 import org.powerbot.game.api.ActiveScript;
+import org.powerbot.game.api.Manifest;
 import org.powerbot.game.bot.event.listener.PaintListener;
 
+@Manifest(authors = { "PotatoPlanet" }, name = "Beer Buyer", version = 0.1)
 public class beerBuyer extends ActiveScript implements PaintListener {
 
 	@Override

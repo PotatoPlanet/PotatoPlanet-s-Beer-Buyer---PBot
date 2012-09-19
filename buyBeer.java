@@ -1,6 +1,5 @@
 package beerBuyer;
 
-import org.powerbot.concurrent.Task;
 import org.powerbot.concurrent.strategy.Strategy;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Walking;
@@ -12,8 +11,7 @@ import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Time;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 
-@SuppressWarnings("deprecation")
-public class buyBeer extends Strategy implements Task {
+public class buyBeer extends Strategy implements Runnable {
 
 	@Override
 	public void run() {

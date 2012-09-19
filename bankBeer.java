@@ -1,6 +1,5 @@
 package beerBuyer;
 
-import org.powerbot.concurrent.Task;
 import org.powerbot.concurrent.strategy.Strategy;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.Walking;
@@ -9,10 +8,10 @@ import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.util.Time;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 
-@SuppressWarnings("deprecation")
-public class bankBeer extends Strategy implements Task {
+public class bankBeer extends Strategy implements Runnable {
 
 	@Override
 	public void run() {
@@ -24,8 +23,9 @@ public class bankBeer extends Strategy implements Task {
 				NPC Banker = NPCs.getNearest(ID.bankerID);
 				if (Banker.isOnScreen()) {
 
-					Banker.interact("Bank");
+					Bank.open();
 					Bank.depositInventory();
+					Time.sleep(300, 1000);
 					Bank.close();
 
 				}
@@ -33,7 +33,6 @@ public class bankBeer extends Strategy implements Task {
 				else {
 					Camera.turnTo(Banker);
 				}
-				Banker.interact("Bank");
 
 			} else {
 				Walking.newTilePath(ID.bankToBeerShop);
@@ -48,9 +47,7 @@ public class bankBeer extends Strategy implements Task {
 	}
 
 	public Boolean Validate() {
-		return Inventory.isFull() == true && Game.getClientState() != 12
-				&& ID.Bank == true;
-
+		return Inventory.isFull() && Game.getClientState() != 12;
 	}
 
 }
